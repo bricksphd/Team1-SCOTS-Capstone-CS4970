@@ -1,7 +1,11 @@
-export default class Component{
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    //Reference to containing GameObject
-    gameObject;
-    
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-}
+var Component = function Component() {
+  _classCallCheck(this, Component);
+
+  _defineProperty(this, "gameObject", void 0);
+};
+
+export { Component as default };

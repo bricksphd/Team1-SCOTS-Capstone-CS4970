@@ -1,51 +1,86 @@
-import Base from "../../engine/Base.js"
-import Input from "../../engine/base/Input.js"
-import CircleComponent from "../../engine/components/CircleComponent.js"
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+import Base from "../../engine/Base.js";
+import Input from "../../engine/base/Input.js";
+import CircleComponent from "../../engine/components/CircleComponent.js";
 import TapHandler from "./TapHandler.js";
 
-export default class CircleBehaviour extends Base.Behavior {
-    circle;
-    tapHandler;
-    feedback;
+var CircleBehaviour = /*#__PURE__*/function (_Base$Behavior) {
+  _inherits(CircleBehaviour, _Base$Behavior);
 
-    constructor(feedback) {
-        super();
-        this.feedback = feedback;
+  function CircleBehaviour(feedback) {
+    var _this;
+
+    _classCallCheck(this, CircleBehaviour);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CircleBehaviour).call(this));
+
+    _defineProperty(_assertThisInitialized(_this), "circle", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "tapHandler", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "feedback", void 0);
+
+    _this.feedback = feedback;
+    return _this;
+  }
+
+  _createClass(CircleBehaviour, [{
+    key: "start",
+    value: function start() {
+      this.circle = this.gameObject.getComponent(CircleComponent);
+      this.tapHandler = this.gameObject.getComponent(TapHandler);
     }
+  }, {
+    key: "update",
+    value: function update() {}
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      if (Input.keys[' '] || Input.touch) {
+        this.circle.radius = 90;
+        var delta = this.tapHandler.tapDown();
 
-    start() {
-        this.circle = this.gameObject.getComponent(CircleComponent);
-        this.tapHandler = this.gameObject.getComponent(TapHandler);
-    }
-
-    update() {
-
-    }
-
-    pulse() {
-        if(Input.keys[' '] || Input.touch) {
-            this.circle.radius = 90;
-            let delta = this.tapHandler.tapDown();
-
-            if(this.feedback == "true") {
-                if (this.tapHandler.timer.soundOn) {
-                    if (Math.abs(delta) < this.tapHandler.beatTime / 6) {
-                        this.circle.fill = "green";
-                    }
-                    else if (Math.abs(delta) < this.tapHandler.beatTime * 2 / 6) {
-                        this.circle.fill = "yellow"
-                    }
-                    else {
-                        this.circle.fill = "red";
-                    }
-                }
+        if (this.feedback == "true") {
+          if (this.tapHandler.timer.soundOn) {
+            if (Math.abs(delta) < this.tapHandler.beatTime / 6) {
+              this.circle.fill = "green";
+            } else if (Math.abs(delta) < this.tapHandler.beatTime * 2 / 6) {
+              this.circle.fill = "yellow";
+            } else {
+              this.circle.fill = "red";
             }
-        } 
-
-        if (!Input.keys[' '] && !Input.touch){
-            this.circle.radius = 100;
-            this.circle.fill = "white";
-            this.tapHandler.tapUp();
+          }
         }
+      }
+
+      if (!Input.keys[' '] && !Input.touch) {
+        this.circle.radius = 100;
+        this.circle.fill = "white";
+        this.tapHandler.tapUp();
+      }
     }
-}
+  }]);
+
+  return CircleBehaviour;
+}(Base.Behavior);
+
+export { CircleBehaviour as default };

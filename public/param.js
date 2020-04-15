@@ -6,9 +6,9 @@ function setParams() {
   var feedback = document.getElementById("feedback").checked;
   sessionStorage.clear();
   sessionStorage.setItem("aid", "Custom Session");
-  sessionStorage.setItem("bpm",bpm);
-  sessionStorage.setItem("timeWSound",timeWSound);
-  sessionStorage.setItem("cycles",cycles);
-  sessionStorage.setItem("timeWOSound",timeWOSound);
-  sessionStorage.setItem("feedback",feedback);
+  sessionStorage.setItem("bpm", bpm);
+  sessionStorage.setItem("timeWSound", timeWSound);
+  sessionStorage.setItem("cycles", cycles);
+  sessionStorage.setItem("timeWOSound", timeWOSound);
+  sessionStorage.setItem("feedback", feedback);
 }

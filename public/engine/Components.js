@@ -1,9 +1,8 @@
-import CircleComponent from "./components/CircleComponent.js"
-import RectangleComponent from "./components/RectangleComponent.js"
-import TextComponent from "./components/TextComponent.js"
-
+import CircleComponent from "./components/CircleComponent.js";
+import RectangleComponent from "./components/RectangleComponent.js";
+import TextComponent from "./components/TextComponent.js";
 export default {
-  CircleComponent,
-  RectangleComponent,
-  TextComponent
-}
+  CircleComponent: CircleComponent,
+  RectangleComponent: RectangleComponent,
+  TextComponent: TextComponent
+};

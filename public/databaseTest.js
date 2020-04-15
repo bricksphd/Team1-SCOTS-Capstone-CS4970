@@ -1,106 +1,130 @@
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-import {createAssignment, createSession, getAllSessionsForUser, getAssignmentsForUser, getUsers} from "./Data.js";
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-  const status = document.querySelector("#status");
-  const inputBox = document.querySelector("#myText");
-  const insertSession = document.querySelector("#insertSession");
-  const insertAssign = document.querySelector("#insertAssign");
-  const getSession = document.querySelector("#getSession");
-  const getAssign = document.querySelector("#getAssignment");
-  const getUser = document.querySelector("#getUser");
+import { createAssignment, createSession, getAllSessionsForUser, getAssignmentsForUser, getUsers } from "./Data.js";
+var status = document.querySelector("#status");
+var inputBox = document.querySelector("#myText");
+var insertSession = document.querySelector("#insertSession");
+var insertAssign = document.querySelector("#insertAssign");
+var getSession = document.querySelector("#getSession");
+var getAssign = document.querySelector("#getAssignment");
+var getUser = document.querySelector("#getUser");
+getSession.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  var user, data;
+  return regeneratorRuntime.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          user = firebase.auth().currentUser;
+          console.log(user);
+          _context.next = 4;
+          return getAllSessionsForUser("vkvd7hlKXEOJSxSnn0pe2CJ5OXE3");
 
-  getSession.addEventListener("click", async function(){
-    var user = firebase.auth().currentUser;
-    console.log(user);
-  
-    let data = await getAllSessionsForUser("vkvd7hlKXEOJSxSnn0pe2CJ5OXE3");
-    console.log("Client session data ", data);
-    //something odd here where doesnt print out each element...due to size?
-    data.dataArray.forEach(obj =>{
-      console.log("client session element " + obj);
-    });
-    //You can still acess elements tho
-    console.log("First element ", data.dataArray[0]);
+        case 4:
+          data = _context.sent;
+          console.log("Client session data ", data); //something odd here where doesnt print out each element...due to size?
 
-  })
+          data.dataArray.forEach(function (obj) {
+            console.log("client session element " + obj);
+          }); //You can still acess elements tho
 
-  getAssign.addEventListener("click", async function(){
-    let data = await getAssignmentsForUser("vkvd7hlKXEOJSxSnn0pe2CJ5OXE3");
-    console.log("Client assignment data ", data);
-    data.dataArray.forEach(obj =>{
-      console.log("client assignment element ", obj);
-    })
-    
-  })
+          console.log("First element ", data.dataArray[0]);
 
-  getUser.addEventListener("click", async function(){
-    let data = await getUsers();
-    console.log("Client user data ", data);
-    data.dataArray.forEach(obj =>{
-      console.log("client user element ", obj);
-    })
-  })
+        case 8:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee);
+})));
+getAssign.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+  var data;
+  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return getAssignmentsForUser("vkvd7hlKXEOJSxSnn0pe2CJ5OXE3");
 
+        case 2:
+          data = _context2.sent;
+          console.log("Client assignment data ", data);
+          data.dataArray.forEach(function (obj) {
+            console.log("client assignment element ", obj);
+          });
 
-insertAssign.addEventListener("click", function(){
-    createAssignment(
-    "Assignment 3",
-    "120",
-    "10",
-    "10",
-    "1",
-    "True",
-    ["vkvd7hlKXEOJSxSnn0pe2CJ5OXE3", "user2"]);
-    console.log("Created Assignment");
+        case 5:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _callee2);
+})));
+getUser.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+  var data;
+  return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return getUsers();
+
+        case 2:
+          data = _context3.sent;
+          console.log("Client user data ", data);
+          data.dataArray.forEach(function (obj) {
+            console.log("client user element ", obj);
+          });
+
+        case 5:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
+})));
+insertAssign.addEventListener("click", function () {
+  createAssignment("Assignment 3", "120", "10", "10", "1", "True", ["vkvd7hlKXEOJSxSnn0pe2CJ5OXE3", "user2"]);
+  console.log("Created Assignment");
 });
-
-insertSession.addEventListener("click", function(){
-    let tapData = [{
-        beat: 0,
-        delta: -26,
-        duration: 0,
-        nextBeat: 0,
-        nextDelta: 4,
-        pressTime: 500,
-        prevBeat: 0,
-        releaseTime: 0,
-        side: 0,
-        soundOn: true,
-        timeSinceLast: 574
-    },{
-       beat: 50,
-       delta: -26,
-       duration: 0,
-       nextBeat: 0,
-       nextDelta: 4,
-       pressTime: 500,
-       prevBeat: 0,
-       releaseTime: 0,
-       side: 0,
-       soundOn: true,
-       timeSinceLast: 574
-    },{
-       beat: 100,
-       delta: -26,
-       duration: 0,
-       nextBeat: 0,
-       nextDelta: 4,
-       pressTime: 500,
-       prevBeat: 0,
-       releaseTime: 0,
-       side: 0,
-       soundOn: true,
-       timeSinceLast: 574
-    }] 
-    let ret = createSession(
-         "-1",
-         "120",
-         "10",
-         "10",
-         "1",
-         "True",
-         "vkvd7hlKXEOJSxSnn0pe2CJ5OXE3",
-         tapData
-     );
-     
+insertSession.addEventListener("click", function () {
+  var tapData = [{
+    beat: 0,
+    delta: -26,
+    duration: 0,
+    nextBeat: 0,
+    nextDelta: 4,
+    pressTime: 500,
+    prevBeat: 0,
+    releaseTime: 0,
+    side: 0,
+    soundOn: true,
+    timeSinceLast: 574
+  }, {
+    beat: 50,
+    delta: -26,
+    duration: 0,
+    nextBeat: 0,
+    nextDelta: 4,
+    pressTime: 500,
+    prevBeat: 0,
+    releaseTime: 0,
+    side: 0,
+    soundOn: true,
+    timeSinceLast: 574
+  }, {
+    beat: 100,
+    delta: -26,
+    duration: 0,
+    nextBeat: 0,
+    nextDelta: 4,
+    pressTime: 500,
+    prevBeat: 0,
+    releaseTime: 0,
+    side: 0,
+    soundOn: true,
+    timeSinceLast: 574
+  }];
+  var ret = createSession("-1", "120", "10", "10", "1", "True", "vkvd7hlKXEOJSxSnn0pe2CJ5OXE3", tapData);
 });
